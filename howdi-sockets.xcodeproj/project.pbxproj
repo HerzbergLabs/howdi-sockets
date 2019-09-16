@@ -1,0 +1,608 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F33911FE23301AD600EB1EEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33911FD23301AD600EB1EEB /* AppDelegate.swift */; };
+		F339120023301AD600EB1EEB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33911FF23301AD600EB1EEB /* ViewController.swift */; };
+		F339120323301AD600EB1EEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F339120123301AD600EB1EEB /* Main.storyboard */; };
+		F339120623301AD600EB1EEB /* howdi_sockets.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F339120423301AD600EB1EEB /* howdi_sockets.xcdatamodeld */; };
+		F339120823301AD800EB1EEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F339120723301AD800EB1EEB /* Assets.xcassets */; };
+		F339120B23301AD800EB1EEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F339120923301AD800EB1EEB /* LaunchScreen.storyboard */; };
+		F339121623301AD800EB1EEB /* howdi_socketsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339121523301AD800EB1EEB /* howdi_socketsTests.swift */; };
+		F339122123301AD800EB1EEB /* howdi_socketsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339122023301AD800EB1EEB /* howdi_socketsUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F339121223301AD800EB1EEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F33911F223301AD600EB1EEB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F33911F923301AD600EB1EEB;
+			remoteInfo = "howdi-sockets";
+		};
+		F339121D23301AD800EB1EEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F33911F223301AD600EB1EEB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F33911F923301AD600EB1EEB;
+			remoteInfo = "howdi-sockets";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F33911FA23301AD600EB1EEB /* howdi-sockets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "howdi-sockets.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F33911FD23301AD600EB1EEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F33911FF23301AD600EB1EEB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F339120223301AD600EB1EEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F339120523301AD600EB1EEB /* howdi_sockets.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = howdi_sockets.xcdatamodel; sourceTree = "<group>"; };
+		F339120723301AD800EB1EEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F339120A23301AD800EB1EEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F339120C23301AD800EB1EEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F339121123301AD800EB1EEB /* howdi-socketsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "howdi-socketsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F339121523301AD800EB1EEB /* howdi_socketsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = howdi_socketsTests.swift; sourceTree = "<group>"; };
+		F339121723301AD800EB1EEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F339121C23301AD800EB1EEB /* howdi-socketsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "howdi-socketsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F339122023301AD800EB1EEB /* howdi_socketsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = howdi_socketsUITests.swift; sourceTree = "<group>"; };
+		F339122223301AD800EB1EEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F33911F723301AD600EB1EEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F339120E23301AD800EB1EEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F339121923301AD800EB1EEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F33911F123301AD600EB1EEB = {
+			isa = PBXGroup;
+			children = (
+				F33911FC23301AD600EB1EEB /* howdi-sockets */,
+				F339121423301AD800EB1EEB /* howdi-socketsTests */,
+				F339121F23301AD800EB1EEB /* howdi-socketsUITests */,
+				F33911FB23301AD600EB1EEB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F33911FB23301AD600EB1EEB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F33911FA23301AD600EB1EEB /* howdi-sockets.app */,
+				F339121123301AD800EB1EEB /* howdi-socketsTests.xctest */,
+				F339121C23301AD800EB1EEB /* howdi-socketsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F33911FC23301AD600EB1EEB /* howdi-sockets */ = {
+			isa = PBXGroup;
+			children = (
+				F33911FD23301AD600EB1EEB /* AppDelegate.swift */,
+				F33911FF23301AD600EB1EEB /* ViewController.swift */,
+				F339120123301AD600EB1EEB /* Main.storyboard */,
+				F339120723301AD800EB1EEB /* Assets.xcassets */,
+				F339120923301AD800EB1EEB /* LaunchScreen.storyboard */,
+				F339120C23301AD800EB1EEB /* Info.plist */,
+				F339120423301AD600EB1EEB /* howdi_sockets.xcdatamodeld */,
+			);
+			path = "howdi-sockets";
+			sourceTree = "<group>";
+		};
+		F339121423301AD800EB1EEB /* howdi-socketsTests */ = {
+			isa = PBXGroup;
+			children = (
+				F339121523301AD800EB1EEB /* howdi_socketsTests.swift */,
+				F339121723301AD800EB1EEB /* Info.plist */,
+			);
+			path = "howdi-socketsTests";
+			sourceTree = "<group>";
+		};
+		F339121F23301AD800EB1EEB /* howdi-socketsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F339122023301AD800EB1EEB /* howdi_socketsUITests.swift */,
+				F339122223301AD800EB1EEB /* Info.plist */,
+			);
+			path = "howdi-socketsUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F33911F923301AD600EB1EEB /* howdi-sockets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F339122523301AD800EB1EEB /* Build configuration list for PBXNativeTarget "howdi-sockets" */;
+			buildPhases = (
+				F33911F623301AD600EB1EEB /* Sources */,
+				F33911F723301AD600EB1EEB /* Frameworks */,
+				F33911F823301AD600EB1EEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "howdi-sockets";
+			productName = "howdi-sockets";
+			productReference = F33911FA23301AD600EB1EEB /* howdi-sockets.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F339121023301AD800EB1EEB /* howdi-socketsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F339122823301AD800EB1EEB /* Build configuration list for PBXNativeTarget "howdi-socketsTests" */;
+			buildPhases = (
+				F339120D23301AD800EB1EEB /* Sources */,
+				F339120E23301AD800EB1EEB /* Frameworks */,
+				F339120F23301AD800EB1EEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F339121323301AD800EB1EEB /* PBXTargetDependency */,
+			);
+			name = "howdi-socketsTests";
+			productName = "howdi-socketsTests";
+			productReference = F339121123301AD800EB1EEB /* howdi-socketsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F339121B23301AD800EB1EEB /* howdi-socketsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F339122B23301AD800EB1EEB /* Build configuration list for PBXNativeTarget "howdi-socketsUITests" */;
+			buildPhases = (
+				F339121823301AD800EB1EEB /* Sources */,
+				F339121923301AD800EB1EEB /* Frameworks */,
+				F339121A23301AD800EB1EEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F339121E23301AD800EB1EEB /* PBXTargetDependency */,
+			);
+			name = "howdi-socketsUITests";
+			productName = "howdi-socketsUITests";
+			productReference = F339121C23301AD800EB1EEB /* howdi-socketsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F33911F223301AD600EB1EEB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1030;
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = "Herzberg Labs Inc";
+				TargetAttributes = {
+					F33911F923301AD600EB1EEB = {
+						CreatedOnToolsVersion = 10.3;
+					};
+					F339121023301AD800EB1EEB = {
+						CreatedOnToolsVersion = 10.3;
+						TestTargetID = F33911F923301AD600EB1EEB;
+					};
+					F339121B23301AD800EB1EEB = {
+						CreatedOnToolsVersion = 10.3;
+						TestTargetID = F33911F923301AD600EB1EEB;
+					};
+				};
+			};
+			buildConfigurationList = F33911F523301AD600EB1EEB /* Build configuration list for PBXProject "howdi-sockets" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F33911F123301AD600EB1EEB;
+			productRefGroup = F33911FB23301AD600EB1EEB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F33911F923301AD600EB1EEB /* howdi-sockets */,
+				F339121023301AD800EB1EEB /* howdi-socketsTests */,
+				F339121B23301AD800EB1EEB /* howdi-socketsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F33911F823301AD600EB1EEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F339120B23301AD800EB1EEB /* LaunchScreen.storyboard in Resources */,
+				F339120823301AD800EB1EEB /* Assets.xcassets in Resources */,
+				F339120323301AD600EB1EEB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F339120F23301AD800EB1EEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F339121A23301AD800EB1EEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F33911F623301AD600EB1EEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F339120023301AD600EB1EEB /* ViewController.swift in Sources */,
+				F339120623301AD600EB1EEB /* howdi_sockets.xcdatamodeld in Sources */,
+				F33911FE23301AD600EB1EEB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F339120D23301AD800EB1EEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F339121623301AD800EB1EEB /* howdi_socketsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F339121823301AD800EB1EEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F339122123301AD800EB1EEB /* howdi_socketsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F339121323301AD800EB1EEB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F33911F923301AD600EB1EEB /* howdi-sockets */;
+			targetProxy = F339121223301AD800EB1EEB /* PBXContainerItemProxy */;
+		};
+		F339121E23301AD800EB1EEB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F33911F923301AD600EB1EEB /* howdi-sockets */;
+			targetProxy = F339121D23301AD800EB1EEB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F339120123301AD600EB1EEB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F339120223301AD600EB1EEB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F339120923301AD800EB1EEB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F339120A23301AD800EB1EEB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F339122323301AD800EB1EEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F339122423301AD800EB1EEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F339122623301AD800EB1EEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RHUC5VF4N2;
+				INFOPLIST_FILE = "howdi-sockets/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.howdi.ios.howdi-sockets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F339122723301AD800EB1EEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RHUC5VF4N2;
+				INFOPLIST_FILE = "howdi-sockets/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.howdi.ios.howdi-sockets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F339122923301AD800EB1EEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RHUC5VF4N2;
+				INFOPLIST_FILE = "howdi-socketsTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.howdi.ios.howdi-socketsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/howdi-sockets.app/howdi-sockets";
+			};
+			name = Debug;
+		};
+		F339122A23301AD800EB1EEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RHUC5VF4N2;
+				INFOPLIST_FILE = "howdi-socketsTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.howdi.ios.howdi-socketsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/howdi-sockets.app/howdi-sockets";
+			};
+			name = Release;
+		};
+		F339122C23301AD800EB1EEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RHUC5VF4N2;
+				INFOPLIST_FILE = "howdi-socketsUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.howdi.ios.howdi-socketsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "howdi-sockets";
+			};
+			name = Debug;
+		};
+		F339122D23301AD800EB1EEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RHUC5VF4N2;
+				INFOPLIST_FILE = "howdi-socketsUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.howdi.ios.howdi-socketsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "howdi-sockets";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F33911F523301AD600EB1EEB /* Build configuration list for PBXProject "howdi-sockets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F339122323301AD800EB1EEB /* Debug */,
+				F339122423301AD800EB1EEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F339122523301AD800EB1EEB /* Build configuration list for PBXNativeTarget "howdi-sockets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F339122623301AD800EB1EEB /* Debug */,
+				F339122723301AD800EB1EEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F339122823301AD800EB1EEB /* Build configuration list for PBXNativeTarget "howdi-socketsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F339122923301AD800EB1EEB /* Debug */,
+				F339122A23301AD800EB1EEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F339122B23301AD800EB1EEB /* Build configuration list for PBXNativeTarget "howdi-socketsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F339122C23301AD800EB1EEB /* Debug */,
+				F339122D23301AD800EB1EEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F339120423301AD600EB1EEB /* howdi_sockets.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F339120523301AD600EB1EEB /* howdi_sockets.xcdatamodel */,
+			);
+			currentVersion = F339120523301AD600EB1EEB /* howdi_sockets.xcdatamodel */;
+			path = howdi_sockets.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = F33911F223301AD600EB1EEB /* Project object */;
+}
