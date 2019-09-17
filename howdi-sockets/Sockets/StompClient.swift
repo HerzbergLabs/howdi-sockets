@@ -75,11 +75,11 @@ final class StompSpecification {
     }
     
     public func generateReceipt() -> String {
-        return "receipt-" + Int(arc4random_uniform(1000)).description
+        return "receipt-" + UUID().uuidString.lowercased()
     }
     
     public func generateSubscriptionId() -> String {
-        return "subscription-id-" + Int(arc4random_uniform(1000)).description
+        return "subscription-id-" + UUID().uuidString.lowercased()
     }
     
     public func generateHeartBeat() -> String {
