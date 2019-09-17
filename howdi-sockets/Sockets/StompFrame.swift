@@ -30,10 +30,10 @@ public struct StompClientFrame: CustomStringConvertible {
 
 struct StompServerFrame: CustomStringConvertible {
     private(set) var command: StompServerCommand
-    private(set) var headers: Set<StompHeader>
+    private(set) var headers: [String : StompHeader]
     private(set) var body: String
     
-    init(command: StompServerCommand, headers: Set<StompHeader> = [], body: String) {
+    private init(command: StompServerCommand, headers: [String : StompHeader], body: String) {
         self.command = command
         self.headers = headers
         self.body = body
@@ -48,7 +48,7 @@ struct StompServerFrame: CustomStringConvertible {
         
         let command = try StompServerCommand(text: components.first!)
         
-        var headers: Set<StompHeader> = []
+        var headers: [String:StompHeader] = [:]
         var body = ""
         var isBody = false
         for index in 1 ..< components.count {
@@ -63,11 +63,12 @@ struct StompServerFrame: CustomStringConvertible {
                     isBody = true
                 } else {
                     let parts = component.components(separatedBy: ":")
+                    
                     guard let key = parts.first, let value = parts.last else {
                         continue
                     }
-                    let header = StompHeader(key: key, value: value)
-                    headers.insert(header)
+                    
+                    headers[key] = StompHeader(key: key, value: value)
                 }
             }
         }
@@ -78,13 +79,17 @@ struct StompServerFrame: CustomStringConvertible {
     var description: String {
         var string = command.rawValue + "\n"
         
-        for header in headers {
+        for header in headers.values {
             string += header.key + ":" + header.value + "\n"
         }
         
         string += "\n" + body + "\0"
         
         return string
+    }
+    
+    func getHeader(_ header: String) -> String {
+        return (headers[header]?.value)!
     }
 }
 
@@ -145,7 +150,7 @@ enum StompHeader: Hashable {
     case destination(destination: String)
     case transaction(transaction: String)
     
-    case subscriptionId(id: String)
+    case id(id: String)
     case ack(ack: String)
     
     case messageId(id: String)
@@ -184,7 +189,7 @@ enum StompHeader: Hashable {
         case "transaction":
             self = .transaction(transaction: value)
         case "id":
-            self = .subscriptionId(id: value)
+            self = .id(id: value)
         case "ack":
             self = .ack(ack: value)
         case "message-id":
@@ -226,7 +231,7 @@ enum StompHeader: Hashable {
             return "destination"
         case .transaction:
             return "transaction"
-        case .subscriptionId:
+        case .id:
             return "id"
         case .ack:
             return "ack"
@@ -271,7 +276,7 @@ enum StompHeader: Hashable {
             return destination
         case .transaction(let transaction):
             return transaction
-        case .subscriptionId(let id):
+        case .id(let id):
             return id
         case .ack(let ack):
             return ack

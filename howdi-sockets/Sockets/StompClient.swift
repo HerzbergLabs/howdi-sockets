@@ -33,12 +33,8 @@ final class StompSpecification {
         return StompClientFrame(command: .connect, headers: headers)
     }
     
-    public func generateSubscriptionId() -> String {
-        return "sub-" + Int(arc4random_uniform(1000)).description
-    }
-    
     public func subscribe(id: String, destination: String, headers: [String : String] = [:]) -> StompClientFrame {
-        var stompHeaders: Set<StompHeader> = [.subscriptionId(id: id), .destination(destination: destination)]
+        var stompHeaders: Set<StompHeader> = [.id(id: id), .destination(destination: destination), .ack(ack: "client-individual")]
         
         for (key, value) in headers {
             stompHeaders.insert(.custom(key: key, value: value))
@@ -61,13 +57,29 @@ final class StompSpecification {
     }
     
     public func unsubscribe(subscriptionId: String) -> StompClientFrame {
-        let headers: Set<StompHeader> = [.subscriptionId(id: subscriptionId)]
+        let headers: Set<StompHeader> = [.id(id: subscriptionId)]
         
         return StompClientFrame(command: .unsubscribe, headers: headers)
     }
     
-    public func disconnect() -> StompClientFrame {
-        return StompClientFrame(command: .disconnect)
+    public func ack(messageId: String) -> StompClientFrame {
+        let headers: Set<StompHeader> = [.id(id: messageId)]
+        
+        return StompClientFrame(command: .ack, headers: headers)
+    }
+    
+    public func disconnect(receipt: String) -> StompClientFrame {
+        let headers: Set<StompHeader> = [.receipt(receipt: receipt)]
+        
+        return StompClientFrame(command: .disconnect, headers: headers)
+    }
+    
+    public func generateReceipt() -> String {
+        return "receipt-" + Int(arc4random_uniform(1000)).description
+    }
+    
+    public func generateSubscriptionId() -> String {
+        return "subscription-id-" + Int(arc4random_uniform(1000)).description
     }
     
     public func generateHeartBeat() -> String {
@@ -85,6 +97,8 @@ public final class WebsocketStompClient : StompClient, WebSocketDelegate {
     private let specification: StompSpecification = StompSpecification()
     private let url: URL
     private let socket: WebSocket
+    
+    private var disconnectReceipt: String = ""
     
     private var frameQueue: FrameQueue = FrameQueue()
     
@@ -120,9 +134,9 @@ public final class WebsocketStompClient : StompClient, WebSocketDelegate {
     }
     
     public func disconnect() {
-        sendFrame(specification.disconnect())
+        disconnectReceipt = specification.generateReceipt()
         
-        socket.disconnect()
+        sendFrame(specification.disconnect(receipt: disconnectReceipt))
     }
     
     public func sendFrame(_ frame: StompClientFrame) {
@@ -166,7 +180,11 @@ public final class WebsocketStompClient : StompClient, WebSocketDelegate {
                     
                     delegate?.stompClientDidConnect(client: self)
                 case .message:
-                    print("Message recieved")
+                    sendFrame(specification.ack(messageId: frame.getHeader("message-id")))
+                case .receipt:
+                    if frame.getHeader("receipt-id") == disconnectReceipt {
+                        socket.disconnect()
+                    }
                 case .error:
                     print("Error recieved")
                 default:
@@ -221,7 +239,7 @@ public final class OfflineStompClient : StompClient {
     }
     
     public func disconnect() {
-        sendFrame(specification.disconnect())
+        sendFrame(specification.disconnect(receipt: specification.generateReceipt()))
     }
     
     public func sendFrame(_ frame: StompClientFrame) {
