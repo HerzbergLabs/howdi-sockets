@@ -119,7 +119,7 @@ enum StompServerCommand: String {
     
     init(text: String) throws {
         guard let command = StompServerCommand(rawValue: text) else {
-            throw NSError(domain: "io.howdi.ios", code: 1002, userInfo: [NSLocalizedDescriptionKey : "Received command is undefined."])
+            throw NSError(domain: "io.howdi.ios.sockets", code: 1002, userInfo: [NSLocalizedDescriptionKey : "Received command is undefined."])
         }
         
         self = command
@@ -128,42 +128,71 @@ enum StompServerCommand: String {
 
 
 enum StompHeader: Hashable {
-    case acceptVersion(version: String)
-    case heartBeat(value: String)
-    case host(hostname: String)
-    case destination(path: String)
-    case destinationId(id: String)
-    case version(version: String)
-    case subscription(id: String)
-    case messageId(id: String)
     case contentLength(length: Int)
-    case message(message: String)
-    case userName(name: String)
     case contentType(type: String)
+    case receipt(receipt: String)
+    
+    case acceptVersion(version: String)
+    case host(host: String)
+    case login(login: String)
+    case passcode(passcode: String)
+    case heartBeat(value: String)
+    
+    case version(version: String)
+    case session(session: String)
+    case server(server: String)
+    
+    case destination(destination: String)
+    case transaction(transaction: String)
+    
+    case subscriptionId(id: String)
+    case ack(ack: String)
+    
+    case messageId(id: String)
+    case subscription(id: String)
+    
+    case receiptId(id: String)
+    
     case custom(key: String, value: String)
     
     init(key: String, value: String) {
         switch key {
-        case "version":
-            self = .version(version: value)
-        case "subscription":
-            self = .subscription(id: value)
-        case "message-id":
-            self = .messageId(id: value)
         case "content-length":
             self = .contentLength(length: Int(value)!)
-        case "message":
-            self = .message(message: value)
-        case "destination":
-            self = .destination(path: value)
-        case "heart-beat":
-            self = .heartBeat(value: value)
-        case "host":
-            self = .host(hostname: value)
-        case "user-name":
-            self = .userName(name: value)
         case "content-type":
             self = .contentType(type: value)
+        case "receipt":
+            self = .receipt(receipt: value)
+        case "accept-version":
+            self = .acceptVersion(version: value)
+        case "host":
+            self = .host(host: value)
+        case "login":
+            self = .login(login: value)
+        case "passcode":
+            self = .passcode(passcode: value)
+        case "heart-beat":
+            self = .heartBeat(value: value)
+        case "version":
+            self = .version(version: value)
+        case "session":
+            self = .session(session: value)
+        case "server":
+            self = .server(server: value)
+        case "destination":
+            self = .destination(destination: value)
+        case "transaction":
+            self = .transaction(transaction: value)
+        case "id":
+            self = .subscriptionId(id: value)
+        case "ack":
+            self = .ack(ack: value)
+        case "message-id":
+            self = .messageId(id: value)
+        case "subscription":
+            self = .subscription(id: value)
+        case "receipt-id":
+            self = .receiptId(id: value)
         default:
             self = .custom(key: key, value: value)
         }
@@ -171,63 +200,87 @@ enum StompHeader: Hashable {
     
     var key: String {
         switch self {
-        case .acceptVersion:
-            return "accept-version"
-        case .heartBeat:
-            return "heart-beat"
-        case .host:
-            return "host"
-        case .destination:
-            return "destination"
-        case .destinationId:
-            return "id"
-        case .custom(let key, _):
-            return key
-        case .version:
-            return "version"
-        case .subscription:
-            return "subscription"
-        case .messageId:
-            return "message-id"
         case .contentLength:
             return "content-length"
-        case .message:
-            return "message"
-        case .userName:
-            return "user-name"
         case .contentType:
             return "content-type"
+        case .receipt:
+            return "receipt"
+        case .acceptVersion:
+            return "accept-version"
+        case .host:
+            return "host"
+        case .login:
+            return "login"
+        case .passcode:
+            return "passcode"
+        case .heartBeat:
+            return "heart-beat"
+        case .version:
+            return "version"
+        case .session:
+            return "session"
+        case .server:
+            return "server"
+        case .destination:
+            return "destination"
+        case .transaction:
+            return "transaction"
+        case .subscriptionId:
+            return "id"
+        case .ack:
+            return "ack"
+        case .messageId:
+            return "message-id"
+        case .subscription:
+            return "subscription"
+        case .receiptId:
+            return "receipt-id"
+        case .custom(let key, _):
+            return key
         }
     }
     
     var value: String {
         switch self {
+        case .custom(_, let value):
+            return value
+        case .contentLength(let length):
+            return "\(length)"
+        case .contentType(let type):
+            return type
+        case .receipt(let receipt):
+            return receipt
         case .acceptVersion(let version):
             return version
+        case .host(let host):
+            return host
+        case .login(let login):
+            return login
+        case .passcode(let passcode):
+            return passcode
         case .heartBeat(let value):
-            return value
-        case .host(let hostname):
-            return hostname
-        case .destination(let path):
-            return path
-        case .destinationId(let id):
-            return id
-        case .custom(_, let value):
             return value
         case .version(let version):
             return version
-        case .subscription(let id):
+        case .session(let session):
+            return session
+        case .server(let server):
+            return server
+        case .destination(let destination):
+            return destination
+        case .transaction(let transaction):
+            return transaction
+        case .subscriptionId(let id):
             return id
+        case .ack(let ack):
+            return ack
         case .messageId(let id):
             return id
-        case .contentLength(let length):
-            return "\(length)"
-        case .message(let body):
-            return body
-        case .userName(let name):
-            return name
-        case .contentType(let type):
-            return type
+        case .subscription(let id):
+            return id
+        case .receiptId(let id):
+            return id
         }
     }
     

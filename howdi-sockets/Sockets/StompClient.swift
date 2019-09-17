@@ -7,10 +7,10 @@ import Starscream
 
 public protocol StompClientDelegate {
     func stompClientDidConnect(client: StompClient)
-    func stompClientDidDisconnect(client: StompClient)
-    func stompClientDidDisconnectWithError(client: StompClient, error: Error)
-    func stompClientDidReceiveData(client: StompClient, data: Data, destination: String)
+    func stompClientDidReceiveJSONMessage(client: StompClient, destination: String, data: AnyObject, headers: [String : String])
+    func stompClientDidEnqueueFrame(client: StompClient)
     func stompClientDidEncounterError(client: StompClient, error: Error)
+    func stompClientDidDisconnect(client: StompClient, error: Error?)
 }
 
 public final class StompClient : WebSocketDelegate {
@@ -36,17 +36,15 @@ public final class StompClient : WebSocketDelegate {
         socket.connect()
     }
     
-    public func sendJSONMessage(destination: String, data: AnyObject, headers: [String : String]? = nil){
+    public func sendJSONMessage(destination: String, data: AnyObject, headers: [String : String] = [:]){
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: data, options: JSONSerialization.WritingOptions())
             let message = String(data: jsonData, encoding: String.Encoding.utf8)!
             
             var stompHeaders: Set<StompHeader> = [.destination(path: destination), .contentType(type: "application/json;charset=UTF-8"), .contentLength(length: message.utf8.count)]
             
-            if let params = headers , !params.isEmpty {
-                for (key, value) in params {
-                    stompHeaders.insert(.custom(key: key, value: value))
-                }
+            for (key, value) in headers {
+                stompHeaders.insert(.custom(key: key, value: value))
             }
             
             sendFrame(StompClientFrame(command: .send, headers: stompHeaders, body: message))
@@ -55,15 +53,13 @@ public final class StompClient : WebSocketDelegate {
         }
     }
     
-    public func subscribe(destination: String, headers: [String : String]? = nil) -> String {
+    public func subscribe(destination: String, headers: [String : String] = [:]) -> String {
         let id = "sub-" + Int(arc4random_uniform(1000)).description
         
-        var stompHeaders: Set<StompHeader> = [.destinationId(id: id), .destination(path: destination)]
+        var stompHeaders: Set<StompHeader> = [.subscriptionId(id: id), .destination(path: destination)]
         
-        if let params = headers , !params.isEmpty {
-            for (key, value) in params {
-                stompHeaders.insert(.custom(key: key, value: value))
-            }
+        for (key, value) in headers {
+            stompHeaders.insert(.custom(key: key, value: value))
         }
         
         sendFrame(StompClientFrame(command: .subscribe, headers: stompHeaders))
@@ -71,8 +67,8 @@ public final class StompClient : WebSocketDelegate {
         return id
     }
     
-    public func unsubscribe(_ destination: String, destinationId: String) {
-        let headers: Set<StompHeader> = [.destinationId(id: destinationId), .destination(path: destination)]
+    public func unsubscribe(destination: String, destinationId: String) {
+        let headers: Set<StompHeader> = [.subscriptionId(id: destinationId), .destination(path: destination)]
         
         sendFrame(StompClientFrame(command: .unsubscribe, headers: headers))
     }
@@ -90,11 +86,7 @@ public final class StompClient : WebSocketDelegate {
     }
     
     public func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
-        if let error = error {
-            delegate?.stompClientDidDisconnectWithError(client: self, error: error)
-        } else {
-            delegate?.stompClientDidDisconnect(client: self)
-        }
+        delegate?.stompClientDidDisconnect(client: self, error: error)
     }
     
     public func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
@@ -137,6 +129,7 @@ public final class StompClient : WebSocketDelegate {
             socket.write(string: frame.description)
         } else {
             frameQueue.enqueue(frame)
+            delegate?.stompClientDidEnqueueFrame(client: self)
         }
     }
     

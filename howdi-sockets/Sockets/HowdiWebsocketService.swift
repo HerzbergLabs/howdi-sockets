@@ -1,6 +1,7 @@
 import Foundation
 
 public class HowdiWebsocketService: NSObject, StompClientDelegate {
+    
     public static let shared = HowdiWebsocketService()
     
     private var stompClient: StompClient?
@@ -30,19 +31,19 @@ public class HowdiWebsocketService: NSObject, StompClientDelegate {
         print("STOMP client did connect")
     }
     
-    public func stompClientDidDisconnect(client: StompClient) {
-        print("STOMP client did disconnect")
+    public func stompClientDidReceiveJSONMessage(client: StompClient, destination: String, data: AnyObject, headers: [String : String]) {
+        print("STOMP client did receive message: destination \(destination), data \(data) headers \(headers)")
     }
     
-    public func stompClientDidDisconnectWithError(client: StompClient, error: Error) {
-        print("STOMP client did disconnect with error: \(error)")
-    }
-    
-    public func stompClientDidReceiveData(client: StompClient, data: Data, destination: String) {
-        print("STOMP client did receive data")
+    public func stompClientDidEnqueueFrame(client: StompClient) {
+        print("STOMP client did enqueue frame")
     }
     
     public func stompClientDidEncounterError(client: StompClient, error: Error) {
-        print("STOMP client did encounter error")
+        print("STOMP client did encounter error \(error)")
+    }
+    
+    public func stompClientDidDisconnect(client: StompClient, error: Error?) {
+        print("STOMP client did disconnect: error \(String(describing: error))")
     }
 }
