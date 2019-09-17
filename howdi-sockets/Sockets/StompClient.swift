@@ -20,7 +20,8 @@ public protocol StompClient {
 
 public protocol StompClientDelegate {
     func stompClientDidConnect(client: StompClient)
-    func stompClientDidReceiveJSONMessage(client: StompClient, destination: String, data: AnyObject, headers: [String : String])
+    func stompClientDidReceiveJSONMessage(client: StompClient, destination: String, subscriptionId: String, data: AnyObject, headers: [String : String])
+    func stompClientDidReceiveReceipt(client: StompClient, receiptId: String)
     func stompClientDidEnqueueFrame(client: StompClient, frame: StompClientFrame)
     func stompClientDidEncounterError(client: StompClient, error: Error)
     func stompClientDidDisconnect(client: StompClient, error: Error?)
@@ -180,15 +181,29 @@ public final class WebsocketStompClient : StompClient, WebSocketDelegate {
                     
                     delegate?.stompClientDidConnect(client: self)
                 case .message:
+                    var headers: [String : String] = [:]
+                    
+                    for header in frame.headers.values {
+                        headers[header.key] = header.value
+                    }
+                    
+                    if frame.getHeader("content-type").contains("application/json") {
+                        if let data = dictFromJSONString(jsonStr: frame.body) {
+                            delegate?.stompClientDidReceiveJSONMessage(client: self, destination: frame.getHeader("destination"), subscriptionId: frame.getHeader("subscription"), data: data, headers: headers)
+                        }
+                    }
+                    
                     sendFrame(specification.ack(messageId: frame.getHeader("message-id")))
                 case .receipt:
-                    if frame.getHeader("receipt-id") == disconnectReceipt {
+                    let receiptId = frame.getHeader("receipt-id")
+                    
+                    delegate?.stompClientDidReceiveReceipt(client: self, receiptId: receiptId)
+                    
+                    if receiptId == disconnectReceipt {
                         socket.disconnect()
                     }
                 case .error:
-                    print("Error recieved")
-                default:
-                    break
+                    delegate?.stompClientDidEncounterError(client: self, error: NSError(domain: "io.howdi.ios.sockets", code: 1000, userInfo: [NSLocalizedDescriptionKey : frame.getHeader("message")]))
                 }
             }
         } catch {
@@ -208,6 +223,20 @@ public final class WebsocketStompClient : StompClient, WebSocketDelegate {
         while !frameQueue.isEmpty {
             client.sendFrame(frameQueue.dequeue()!)
         }
+    }
+    
+    private func dictFromJSONString(jsonStr: String?) -> AnyObject? {
+        if let jsonStr = jsonStr {
+            do {
+                if let data = jsonStr.data(using: String.Encoding.utf8) {
+                    let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    return json as AnyObject
+                }
+            } catch {
+                print("error serializing JSON: \(error)")
+            }
+        }
+        return nil
     }
 }
 

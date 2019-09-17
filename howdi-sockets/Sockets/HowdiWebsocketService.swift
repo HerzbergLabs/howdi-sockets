@@ -7,7 +7,6 @@ enum ServiceState {
 }
 
 public class HowdiWebsocketService: NSObject, StompClientDelegate {
-    
     public static let shared = HowdiWebsocketService()
     
     private var state: ServiceState = .offline
@@ -59,8 +58,12 @@ public class HowdiWebsocketService: NSObject, StompClientDelegate {
         }
     }
     
-    public func stompClientDidReceiveJSONMessage(client: StompClient, destination: String, data: AnyObject, headers: [String : String]) {
-        print("STOMP client did receive message: destination \(destination), data \(data) headers \(headers)")
+    public func stompClientDidReceiveJSONMessage(client: StompClient, destination: String, subscriptionId: String, data: AnyObject, headers: [String : String]) {
+        print("STOMP client did receive message: destination \(destination), subscription \(subscriptionId) data \(data) headers \(headers)")
+    }
+    
+    public func stompClientDidReceiveReceipt(client: StompClient, receiptId: String) {
+        print("STOMP client did receive receipt: \(receiptId)")
     }
     
     public func stompClientDidEnqueueFrame(client: StompClient, frame: StompClientFrame) {
