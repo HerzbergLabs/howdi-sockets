@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct StompClientFrame: CustomStringConvertible {
+public struct StompClientFrame: CustomStringConvertible {
     private(set) var command: StompClientCommand
     private(set) var headers: Set<StompHeader>
     private(set) var body: String
@@ -15,7 +15,7 @@ struct StompClientFrame: CustomStringConvertible {
         self.body = body
     }
     
-    var description: String {
+    public var description: String {
         var string = command.rawValue + "\n"
         
         for header in headers {

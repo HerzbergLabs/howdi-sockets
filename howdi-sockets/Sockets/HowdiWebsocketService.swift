@@ -4,26 +4,27 @@ public class HowdiWebsocketService: NSObject, StompClientDelegate {
     
     public static let shared = HowdiWebsocketService()
     
-    private var stompClient: StompClient?
+    private var client: StompClient = OfflineStompClient()
     
     public func initializeService(url: String) {
-        let client = StompClient(url: URL(string: url)!)
+        let client = WebsocketStompClient(url: URL(string: url)!)
         
         client.delegate = self
         client.connect()
         
-        self.stompClient = client
+        self.client.resignToClient(client: client)
+        self.client = client
     }
     
     public func pauseEvents() {
-        if stompClient?.isConnected ?? false {
-            stompClient?.disconnect()
+        if client.isConnected {
+            client.disconnect()
         }
     }
     
     public func resumeEvents() {
-        if !(stompClient?.isConnected ?? false) {
-            stompClient?.connect()
+        if !client.isConnected {
+            client.connect()
         }
     }
     

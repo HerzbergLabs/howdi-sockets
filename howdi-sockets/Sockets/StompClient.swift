@@ -5,6 +5,19 @@
 import Foundation
 import Starscream
 
+public protocol StompClient {
+    var isConnected: Bool { get }
+    
+    func connect()
+    func sendJSONMessage(destination: String, data: AnyObject, headers: [String : String])
+    func subscribe(destination: String, headers: [String : String]) -> String
+    func unsubscribe(subscriptionId: String)
+    func disconnect()
+    
+    func sendFrame(_ frame: StompClientFrame)
+    func resignToClient(client: StompClient)
+}
+
 public protocol StompClientDelegate {
     func stompClientDidConnect(client: StompClient)
     func stompClientDidReceiveJSONMessage(client: StompClient, destination: String, data: AnyObject, headers: [String : String])
@@ -13,13 +26,63 @@ public protocol StompClientDelegate {
     func stompClientDidDisconnect(client: StompClient, error: Error?)
 }
 
-public final class StompClient : WebSocketDelegate {
+final class StompSpecification {
+    public func connect(host: String) -> StompClientFrame {
+        let headers: Set<StompHeader> = [.acceptVersion(version: "1.1,1.2"), .host(host: host), .heartBeat(value: "10000,10000")]
+        
+        return StompClientFrame(command: .connect, headers: headers)
+    }
+    
+    public func generateSubscriptionId() -> String {
+        return "sub-" + Int(arc4random_uniform(1000)).description
+    }
+    
+    public func subscribe(id: String, destination: String, headers: [String : String] = [:]) -> StompClientFrame {
+        var stompHeaders: Set<StompHeader> = [.subscriptionId(id: id), .destination(destination: destination)]
+        
+        for (key, value) in headers {
+            stompHeaders.insert(.custom(key: key, value: value))
+        }
+        
+        return StompClientFrame(command: .subscribe, headers: stompHeaders)
+    }
+    
+    public func sendJSONMessage(destination: String, data: AnyObject, headers: [String : String] = [:]) throws -> StompClientFrame {
+        let jsonData = try JSONSerialization.data(withJSONObject: data, options: JSONSerialization.WritingOptions())
+        let message = String(data: jsonData, encoding: String.Encoding.utf8)!
+        
+        var stompHeaders: Set<StompHeader> = [.destination(destination: destination), .contentType(type: "application/json;charset=UTF-8"), .contentLength(length: message.utf8.count)]
+        
+        for (key, value) in headers {
+            stompHeaders.insert(.custom(key: key, value: value))
+        }
+        
+        return StompClientFrame(command: .send, headers: stompHeaders, body: message)
+    }
+    
+    public func unsubscribe(subscriptionId: String) -> StompClientFrame {
+        let headers: Set<StompHeader> = [.subscriptionId(id: subscriptionId)]
+        
+        return StompClientFrame(command: .unsubscribe, headers: headers)
+    }
+    
+    public func disconnect() -> StompClientFrame {
+        return StompClientFrame(command: .disconnect)
+    }
+    
+    public func generateHeartBeat() -> String {
+        return "\n\n"
+    }
+}
+
+public final class WebsocketStompClient : StompClient, WebSocketDelegate {
     public var delegate: StompClientDelegate?
     
     public var isConnected: Bool {
         return socket.isConnected
     }
     
+    private let specification: StompSpecification = StompSpecification()
     private let url: URL
     private let socket: WebSocket
     
@@ -36,53 +99,49 @@ public final class StompClient : WebSocketDelegate {
         socket.connect()
     }
     
-    public func sendJSONMessage(destination: String, data: AnyObject, headers: [String : String] = [:]){
+    public func sendJSONMessage(destination: String, data: AnyObject, headers: [String : String] = [:]) {
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: data, options: JSONSerialization.WritingOptions())
-            let message = String(data: jsonData, encoding: String.Encoding.utf8)!
-            
-            var stompHeaders: Set<StompHeader> = [.destination(path: destination), .contentType(type: "application/json;charset=UTF-8"), .contentLength(length: message.utf8.count)]
-            
-            for (key, value) in headers {
-                stompHeaders.insert(.custom(key: key, value: value))
-            }
-            
-            sendFrame(StompClientFrame(command: .send, headers: stompHeaders, body: message))
+            try sendFrame(specification.sendJSONMessage(destination: destination, data: data))
         } catch {
             delegate?.stompClientDidEncounterError(client: self, error: error)
         }
     }
     
     public func subscribe(destination: String, headers: [String : String] = [:]) -> String {
-        let id = "sub-" + Int(arc4random_uniform(1000)).description
+        let id = specification.generateSubscriptionId()
         
-        var stompHeaders: Set<StompHeader> = [.subscriptionId(id: id), .destination(path: destination)]
-        
-        for (key, value) in headers {
-            stompHeaders.insert(.custom(key: key, value: value))
-        }
-        
-        sendFrame(StompClientFrame(command: .subscribe, headers: stompHeaders))
+        sendFrame(specification.subscribe(id: id, destination: destination, headers: headers))
         
         return id
     }
     
-    public func unsubscribe(destination: String, destinationId: String) {
-        let headers: Set<StompHeader> = [.subscriptionId(id: destinationId), .destination(path: destination)]
-        
-        sendFrame(StompClientFrame(command: .unsubscribe, headers: headers))
+    public func unsubscribe(subscriptionId: String) {
+        sendFrame(specification.unsubscribe(subscriptionId: subscriptionId))
     }
     
     public func disconnect() {
-        sendFrame(StompClientFrame(command: .disconnect))
+        sendFrame(specification.disconnect())
+        
+        socket.disconnect()
+    }
+    
+    public func sendFrame(_ frame: StompClientFrame) {
+        if socket.isConnected {
+            socket.write(string: frame.description)
+        } else {
+            frameQueue.enqueue(frame)
+            delegate?.stompClientDidEnqueueFrame(client: self)
+        }
+    }
+    
+    public func resignToClient(client: StompClient) {
+        sendFramesToClient(client: client)
         
         socket.disconnect()
     }
     
     public func websocketDidConnect(socket: WebSocketClient) {
-        let headers: Set<StompHeader> = [.acceptVersion(version: "1.1,1.2"), .host(hostname: url.host!), .heartBeat(value: "10000,10000")]
-        
-        sendFrame(StompClientFrame(command: .connect, headers: headers))
+        sendFrame(specification.connect(host: url.host!))
     }
     
     public func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
@@ -102,9 +161,7 @@ public final class StompClient : WebSocketDelegate {
                 
                 switch frame.command {
                 case .connected:
-                    while !frameQueue.isEmpty {
-                        sendFrame(frameQueue.dequeue()!)
-                    }
+                    sendFramesToClient(client: self)
                     
                     delegate?.stompClientDidConnect(client: self)
                 case .message:
@@ -124,17 +181,58 @@ public final class StompClient : WebSocketDelegate {
         // Not called in STOMP
     }
     
-    private func sendFrame(_ frame: StompClientFrame) {
-        if socket.isConnected {
-            socket.write(string: frame.description)
-        } else {
-            frameQueue.enqueue(frame)
-            delegate?.stompClientDidEnqueueFrame(client: self)
-        }
+    private func sendHeartBeat() {
+        socket.write(string: specification.generateHeartBeat())
     }
     
-    private func sendHeartBeat() {
-        socket.write(string: "\n\n")
+    private func sendFramesToClient(client: StompClient) {
+        while !frameQueue.isEmpty {
+            client.sendFrame(frameQueue.dequeue()!)
+        }
+    }
+}
+
+public final class OfflineStompClient : StompClient {
+    public var isConnected: Bool = false
+    
+    private let specification: StompSpecification = StompSpecification()
+    
+    private var frameQueue: FrameQueue = FrameQueue()
+    
+    public init() {}
+    
+    public func connect() {}
+    
+    public func sendJSONMessage(destination: String, data: AnyObject, headers: [String : String] = [:]) {
+        do {
+            try sendFrame(specification.sendJSONMessage(destination: destination, data: data))
+        } catch {}
+    }
+    
+    public func subscribe(destination: String, headers: [String : String] = [:]) -> String {
+        let id = specification.generateSubscriptionId()
+        
+        sendFrame(specification.subscribe(id: id, destination: destination, headers: headers))
+        
+        return id
+    }
+    
+    public func unsubscribe(subscriptionId: String) {
+        sendFrame(specification.unsubscribe(subscriptionId: subscriptionId))
+    }
+    
+    public func disconnect() {
+        sendFrame(specification.disconnect())
+    }
+    
+    public func sendFrame(_ frame: StompClientFrame) {
+        frameQueue.enqueue(frame)
+    }
+    
+    public func resignToClient(client: StompClient) {
+        while !frameQueue.isEmpty {
+            client.sendFrame(frameQueue.dequeue()!)
+        }
     }
 }
 
