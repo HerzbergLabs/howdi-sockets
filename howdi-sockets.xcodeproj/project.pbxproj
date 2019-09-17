@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C54C0C00F42B109336DBDE4 /* Pods_howdi_sockets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32A64B03EFDFA1D9E5EB2913 /* Pods_howdi_sockets.framework */; };
 		F33911FE23301AD600EB1EEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33911FD23301AD600EB1EEB /* AppDelegate.swift */; };
 		F339120023301AD600EB1EEB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33911FF23301AD600EB1EEB /* ViewController.swift */; };
 		F339120323301AD600EB1EEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F339120123301AD600EB1EEB /* Main.storyboard */; };
@@ -15,6 +16,9 @@
 		F339120B23301AD800EB1EEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F339120923301AD800EB1EEB /* LaunchScreen.storyboard */; };
 		F339121623301AD800EB1EEB /* howdi_socketsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339121523301AD800EB1EEB /* howdi_socketsTests.swift */; };
 		F339122123301AD800EB1EEB /* howdi_socketsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339122023301AD800EB1EEB /* howdi_socketsUITests.swift */; };
+		F339123523301C9C00EB1EEB /* StompFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339123223301C9C00EB1EEB /* StompFrame.swift */; };
+		F339123623301C9C00EB1EEB /* StompClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339123123301C9C00EB1EEB /* StompClient.swift */; };
+		F339123823301CC100EB1EEB /* HowdiWebsocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339123723301CC000EB1EEB /* HowdiWebsocketService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		32A64B03EFDFA1D9E5EB2913 /* Pods_howdi_sockets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_howdi_sockets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		43B98B37CF264F562C0A576A /* Pods-howdi-sockets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-howdi-sockets.debug.xcconfig"; path = "Target Support Files/Pods-howdi-sockets/Pods-howdi-sockets.debug.xcconfig"; sourceTree = "<group>"; };
+		69E5DA335393A12BA91D3CC7 /* Pods-howdi-sockets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-howdi-sockets.release.xcconfig"; path = "Target Support Files/Pods-howdi-sockets/Pods-howdi-sockets.release.xcconfig"; sourceTree = "<group>"; };
 		F33911FA23301AD600EB1EEB /* howdi-sockets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "howdi-sockets.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F33911FD23301AD600EB1EEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F33911FF23301AD600EB1EEB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +56,9 @@
 		F339121C23301AD800EB1EEB /* howdi-socketsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "howdi-socketsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F339122023301AD800EB1EEB /* howdi_socketsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = howdi_socketsUITests.swift; sourceTree = "<group>"; };
 		F339122223301AD800EB1EEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F339123123301C9C00EB1EEB /* StompClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompClient.swift; sourceTree = "<group>"; };
+		F339123223301C9C00EB1EEB /* StompFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StompFrame.swift; sourceTree = "<group>"; };
+		F339123723301CC000EB1EEB /* HowdiWebsocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowdiWebsocketService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C54C0C00F42B109336DBDE4 /* Pods_howdi_sockets.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +87,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F18779D689E2ADC73939ABD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				43B98B37CF264F562C0A576A /* Pods-howdi-sockets.debug.xcconfig */,
+				69E5DA335393A12BA91D3CC7 /* Pods-howdi-sockets.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E8A8C8CF4202AE9D12C9ED14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				32A64B03EFDFA1D9E5EB2913 /* Pods_howdi_sockets.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F33911F123301AD600EB1EEB = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +111,8 @@
 				F339121423301AD800EB1EEB /* howdi-socketsTests */,
 				F339121F23301AD800EB1EEB /* howdi-socketsUITests */,
 				F33911FB23301AD600EB1EEB /* Products */,
+				8F18779D689E2ADC73939ABD /* Pods */,
+				E8A8C8CF4202AE9D12C9ED14 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +129,7 @@
 		F33911FC23301AD600EB1EEB /* howdi-sockets */ = {
 			isa = PBXGroup;
 			children = (
+				F339122E23301C3900EB1EEB /* Sockets */,
 				F33911FD23301AD600EB1EEB /* AppDelegate.swift */,
 				F33911FF23301AD600EB1EEB /* ViewController.swift */,
 				F339120123301AD600EB1EEB /* Main.storyboard */,
@@ -128,6 +159,16 @@
 			path = "howdi-socketsUITests";
 			sourceTree = "<group>";
 		};
+		F339122E23301C3900EB1EEB /* Sockets */ = {
+			isa = PBXGroup;
+			children = (
+				F339123123301C9C00EB1EEB /* StompClient.swift */,
+				F339123223301C9C00EB1EEB /* StompFrame.swift */,
+				F339123723301CC000EB1EEB /* HowdiWebsocketService.swift */,
+			);
+			path = Sockets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +176,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F339122523301AD800EB1EEB /* Build configuration list for PBXNativeTarget "howdi-sockets" */;
 			buildPhases = (
+				E25CEEAD654C21C479ABC9D9 /* [CP] Check Pods Manifest.lock */,
 				F33911F623301AD600EB1EEB /* Sources */,
 				F33911F723301AD600EB1EEB /* Frameworks */,
 				F33911F823301AD600EB1EEB /* Resources */,
+				D7D3D50995E6ABED73CF0AA1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -254,6 +297,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D7D3D50995E6ABED73CF0AA1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-howdi-sockets/Pods-howdi-sockets-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-howdi-sockets/Pods-howdi-sockets-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-howdi-sockets/Pods-howdi-sockets-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E25CEEAD654C21C479ABC9D9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-howdi-sockets-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F33911F623301AD600EB1EEB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -262,6 +347,9 @@
 				F339120023301AD600EB1EEB /* ViewController.swift in Sources */,
 				F339120623301AD600EB1EEB /* howdi_sockets.xcdatamodeld in Sources */,
 				F33911FE23301AD600EB1EEB /* AppDelegate.swift in Sources */,
+				F339123823301CC100EB1EEB /* HowdiWebsocketService.swift in Sources */,
+				F339123623301C9C00EB1EEB /* StompClient.swift in Sources */,
+				F339123523301C9C00EB1EEB /* StompFrame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +522,7 @@
 		};
 		F339122623301AD800EB1EEB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43B98B37CF264F562C0A576A /* Pods-howdi-sockets.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -452,6 +541,7 @@
 		};
 		F339122723301AD800EB1EEB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69E5DA335393A12BA91D3CC7 /* Pods-howdi-sockets.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

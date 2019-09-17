@@ -17,12 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        HowdiWebsocketService.shared.initializeService(url: "ws://192.168.0.4:9000/consumer/howdi-sockets?access_token=414975db-dfd5-4fa7-8572-f35baa15179a")
+        
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        HowdiWebsocketService.shared.pauseEvents()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -36,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        HowdiWebsocketService.shared.resumeEvents()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
