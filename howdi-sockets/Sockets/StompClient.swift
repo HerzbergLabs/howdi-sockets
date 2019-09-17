@@ -21,7 +21,7 @@ public protocol StompClient {
 public protocol StompClientDelegate {
     func stompClientDidConnect(client: StompClient)
     func stompClientDidReceiveJSONMessage(client: StompClient, destination: String, data: AnyObject, headers: [String : String])
-    func stompClientDidEnqueueFrame(client: StompClient)
+    func stompClientDidEnqueueFrame(client: StompClient, frame: StompClientFrame)
     func stompClientDidEncounterError(client: StompClient, error: Error)
     func stompClientDidDisconnect(client: StompClient, error: Error?)
 }
@@ -128,9 +128,10 @@ public final class WebsocketStompClient : StompClient, WebSocketDelegate {
     public func sendFrame(_ frame: StompClientFrame) {
         if socket.isConnected {
             socket.write(string: frame.description)
+            print("Sent frame:\n\(frame)")
         } else {
             frameQueue.enqueue(frame)
-            delegate?.stompClientDidEnqueueFrame(client: self)
+            delegate?.stompClientDidEnqueueFrame(client: self, frame: frame)
         }
     }
     
@@ -157,7 +158,7 @@ public final class WebsocketStompClient : StompClient, WebSocketDelegate {
             } else {
                 let frame = try StompServerFrame(text: text)
                 
-                print("Recieved frame:\n\(frame.description)")
+                print("Recieved frame:\n\(frame)")
                 
                 switch frame.command {
                 case .connected:
@@ -198,8 +199,6 @@ public final class OfflineStompClient : StompClient {
     private let specification: StompSpecification = StompSpecification()
     
     private var frameQueue: FrameQueue = FrameQueue()
-    
-    public init() {}
     
     public func connect() {}
     

@@ -17,7 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        HowdiWebsocketService.shared.initializeService(url: "ws://192.168.0.4:9000/consumer/howdi-sockets?access_token=414975db-dfd5-4fa7-8572-f35baa15179a")
+        // HowdiWebsocketService.shared.initializeService(url: "ws://192.168.0.4:9000/consumer/howdi-sockets?access_token=7efe4622-027c-41e6-ae7b-06cc5dd1d368")
+        HowdiWebsocketService.shared.initializeService(url: "wss://dev-api.howdi.io/howdi-sockets?access_token=c53944b1-f57b-43c3-8721-21719c971454")
         
         return true
     }
